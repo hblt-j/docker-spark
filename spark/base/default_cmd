@@ -1,0 +1,9 @@
+#!/bin/bash
+mkdir -p  /var/run/sshd
+sed  -ri 's/session  required  pam_loginuid.so/#session  required  pam_loginuid.so/g' /etc/pam.d/sshd
+sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config
+/etc/init.d/sshd reload
+/etc/init.d/sshd restart
+service sshd start
+
+/usr/sbin/sshd -D
